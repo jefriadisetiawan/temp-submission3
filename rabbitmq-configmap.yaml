@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-config
+data:
+  data.conf: |
+    storage:
+      data: /rabbitmq/data
+ 
