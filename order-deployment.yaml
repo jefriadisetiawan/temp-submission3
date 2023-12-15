@@ -1,23 +1,24 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # mendefinisikan kind adalah deployment
 metadata:
-  name: order-service
+  name: order-service # mendefenisikan metadata yaitu nama order-service
 spec:
-  replicas: 1
+  replicas: 1 # membuat replica sebanyak 1
   selector:
     matchLabels:
-      app: order-service
+      app: order-service # mendefinikan selector dengan label app order-service
   template:
     metadata:
       labels:
-        app: order-service
-    spec:
+        app: order-service # mendefinisikan metadata template dengan label app order service
+    spec: # mendefinisikan spesifikasi container
       containers:
-      - name: order-service 
-        image: jefriadisetiawan/order-service:v1
-        imagePullPolicy: IfNotPresent
+      - name: order-service # nama container
+        image: jefriadisetiawan/order-service:v1 # image container yang digunakan
+        imagePullPolicy: IfNotPresent # kebijakan pull jika image tidak tersedia di lokal
         ports:
-        - containerPort: 3000
+        - containerPort: 3000 # port container
         env:
-        - name: AMQP_URL
-          value: "amqp://10.97.235.82:5672"
+        - name: AMQP_URL # mendefinisikan encironment vaiabel AMQP_URL
+          #value: "amqp:rabbitmq-service-internal"
+          value: "amqp://guest:guest@10.97.235.82:5672" # nilai variabel AMQP_URL

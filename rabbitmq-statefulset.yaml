@@ -1,39 +1,39 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: StatefulSet # mendefinisikan kind statefulset untuk rabbitmq
 metadata:
-  name: rabbitmq-1
+  name: rabbitmq-1 # metadata nama yang digunakan
   labels:
-    app: rabbitmq
-spec:
+    app: rabbitmq # label app yang digunakan
+spec: # spesifikasi
   selector:
     matchLabels:
-      app: rabbitmq
-  serviceName: rabbitmq-service
-  replicas: 1
-  template:
+      app: rabbitmq # selector menggnakan kesamaan label app rabbitmq
+  serviceName: rabbitmq-service # service yang terhubung
+  replicas: 1 # banyak replica yang dibuat
+  template: # mendefinisikan template pod
     metadata:
       labels:
-        app: rabbitmq 
-        selector: rabbitmq-1
-    spec:
+        app: rabbitmq # metadata label app
+        selector: rabbitmq-1 # selector merujuk metadata nama kind
+    spec: # spesifikasi pod
       containers:
-      - name: rabbitmq-container
-        image: rabbitmq:3.11-management
+      - name: rabbitmq-container # nama container
+        image: rabbitmq:3.11-management # image yang digunakan
         ports:
-        - containerPort: 15672 
-        volumeMounts:
+        - containerPort: 15672 # port yang digunakan container
+        volumeMounts: # volume yang di mount ada dua data dan log
         - name: rabbitmq-data
           mountPath: /rabbitmq/data
         - name: rabbitmq-log
-          mountPath: rabbitmq/log
-      volumes:
-      - name: rabbitmq-data
-        configMap:
-          name: rabbitmq-config
+          mountPath: /rabbitmq/log
+      volumes: # medifinisikan detail volume yang di mount
+      - name: rabbitmq-data # nama volume mount
+        configMap: # diambil dari config map
+          name: rabbitmq-config # nama configmap
           items:
-          - key: data.conf
-            path: data.conf
-      - name: rabbitmq-log
-        persistentVolumeClaim:
-          claimName: rabbitmq-pvc
-      
+          - key: data.conf # key configmap
+            path: data.conf # path dalam configmap
+      - name: rabbitmq-log # nama volume mount
+        persistentVolumeClaim: # diambil dari pvc dan pv
+          claimName: rabbitmq-pvc # nama pvc
+     

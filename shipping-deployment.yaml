@@ -1,23 +1,24 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment # medefinisikan kind adalah deployment
 metadata:
-  name: shipping-service
-spec:
-  replicas: 1
+  name: shipping-service # metadata nama yang digunakan
+spec: # spesifikasi
+  replicas: 1 # replica yang dibuat 1
   selector:
     matchLabels:
-      app: shipping-service
-  template:
+      app: shipping-service # selector replica dengan app shipping-service
+  template: # mendefinisikan template
     metadata:
       labels:
-        app: shipping-service
-    spec:
+        app: shipping-service # metadata template dengan label app shipping-service
+    spec: # spesifikasi pod
       containers:
-      - name: shipping-service 
-        image: jefriadisetiawan/shipping-service:v1
-        imagePullPolicy: IfNotPresent
+      - name: shipping-service # nama container
+        image: jefriadisetiawan/shipping-service:v1 # image yang digunakan
+        imagePullPolicy: IfNotPresent # kebijakan pull dari dockerhub jika tidak ada di lokal
         ports:
-        - containerPort: 3001
-        env:
-        - name: AMQP_URL
-          value: "amqp://10.97.235.82:5672"
+        - containerPort: 3001 # port yang digunakan container
+        env: # mendefinisikan environment variabel
+        - name: AMQP_URL # nama environment variabel
+          #value: "amqp:rabbitmq-service-internal"
+          value: "amqp://guest:guest@10.97.235.82:5672" # value environment variabel

@@ -1,13 +1,13 @@
 apiVersion: v1
-kind: Service
+kind: Service # mendefinisikan kind service untuk akses rabbitmq UI
 metadata:
-  name: rabbitmq-service
+  name: rabbitmq-service # metadata nama yang digunakan
   labels:
-    app: rabbitmq
-spec:
+    app: rabbitmq # label app yang digunakan
+spec: # spesifikasi
   ports:
-  - port: 15672
+  - port: 15672 # port yang digunakan 15672 dengan protocol TCP
     protocol: TCP
-  type: NodePort
+  type: NodePort # type port nodeport
   selector:
-    app: rabbitmq
+    app: rabbitmq # selector app adalah rabbitmq

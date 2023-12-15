@@ -1,12 +1,12 @@
 apiVersion: v1
-kind: Service
+kind: Service # mendefinisikan kind service untuk shipping service
 metadata:
-  name: shipping-service
+  name: shipping-service # metadata nama yang digunakan
   labels: 
-    app: shipping-service
-spec:
-  type: NodePort
+    app: shipping-service # label app yang digunakan
+spec: # spesifikasi
+  type: NodePort # tipe port nodeport
   ports:
-  - port: 3001
+  - port: 3001 # port yang digunakan 3001
   selector:
-    app: shipping-service
+    app: shipping-service # selector app yang terhubung shipping-service

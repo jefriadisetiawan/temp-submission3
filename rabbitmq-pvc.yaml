@@ -1,28 +1,28 @@
 apiVersion: v1
-kind: PersistentVolume
+kind: PersistentVolume # mendefinisikan kind adalah persistenvolume
 metadata:
-  name: rabbitmq-pv
+  name: rabbitmq-pv # metadata nama pv adalah rabbitmq-pv
   labels:
-    type: local
-spec:
-  storageClassName: manual
+    type: local # label denga type local
+spec: # spesifikasi
+  storageClassName: manual # mendefinisikan srorageclassname
   capacity:
-    storage: 1Gi
+    storage: 1Gi # kapasitas yang digunakan 1 GB
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce # akses mode RWO
   hostPath:
-    path: "/mnt/data"
+    path: "/mnt/data" # host path
 
 ---
 
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolumeClaim # mendefinisikan kind adalah PVC
 metadata:
-  name: rabbitmq-pvc
+  name: rabbitmq-pvc # metadata nama rabbitmq-pvc
 spec:
-  storageClassName: manual
+  storageClassName: manual # mendefinisikan storageclassname
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce # akses mode yang digunakan RWO
   resources:
     requests:
-      storage: 1Gi
+      storage: 1Gi # kapasitas yang digunakan 1 GB
